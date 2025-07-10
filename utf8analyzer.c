@@ -5,24 +5,26 @@
 #include <stdint.h>
 
 int  is_ascii(char string[]){
-	for(int i =1; string[i] != '\0'; ++i){
+	for(int i =0; string[i] != '\0'; ++i){
 		if((unsigned char) string[i] >127){
 		       	return 0;
 		}       	
 	}
 	return 1; 
-
-
-
-
-
-
 }
 
-
-
-
-
+void capitalize_ascii(char str[]) {
+	 char upper[100] = " ";
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] >= 'a' && str[i] <= 'z') {
+            upper[i] = str[i] - ('a' - 'A');
+        }
+	else{
+            upper[i] = str[i];	
+    }
+    }
+   printf("%s\n", upper);
+ }
 
 
 int main(int argc, char *argv[]) {
@@ -38,6 +40,9 @@ int main(int argc, char *argv[]) {
 	else{
 		printf("true\n");	
 	}
-	return 0; 
+
+	capitalize_ascii(argv[1]);
+	return 0;
+	
     // implement the UTF-8 analyzer here
 }
