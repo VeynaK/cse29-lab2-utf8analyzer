@@ -26,6 +26,33 @@ void capitalize_ascii(char str[]) {
    printf("%s\n", upper);
  }
 
+int32_t len_count(char str[]){
+    int32_t count = 0;
+    int i = 0;
+    while(str[i] != '\0'){
+
+        unsigned char c = str[i];
+
+
+	if ((c & 0x80)==0x00) {
+	    i += 1;
+	}
+	else if ((c & 0xE0)==0xC0) {
+            i += 2;
+        }
+	else if ((c & 0xF0)==0xE0) {
+            i += 3;
+        }
+	else if ((c & 0xF8)==0xF0) {
+            i += 4;
+        }
+	else {
+	    i += 1;
+	}
+	count++;
+    }
+    return i; 
+}
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -42,7 +69,8 @@ int main(int argc, char *argv[]) {
 	}
 
 	capitalize_ascii(argv[1]);
+	printf("%d\n", len_count(argv[1]));
 	return 0;
-	
+        	
     // implement the UTF-8 analyzer here
 }
